@@ -1,0 +1,23 @@
+name: "clip_custom"            # Tên model—ở đây dùng custom CLIP (image + text)
+temperature: 0.07              # Hệ số nhiệt độ (temperature) cho contrastive loss
+
+image_encoder:
+  source: "cnn"                # Nguồn pretrained: ở đây dùng CNN, không phải HuggingFace Transformer
+  name: 'tf_efficientnetv2-detect'  # Tên model CNN (EfficientNetV2 “detect” từ timm)
+  pretrained: true             # Dùng weights đã pretrained
+  model_type: 'cnn'            # Loại encoder là CNN
+
+text_encoder:
+  source: "huggingface"        # Nguồn pretrained: HuggingFace Transformers
+  name: emilyalsentzer/Bio_ClinicalBERT  # Tên model BERT y khoa
+  pretrained: true             # Dùng weights đã pretrained
+  gradient_checkpointing: false # Không bật gradient checkpointing (tiết kiệm VRAM, nhưng chậm hơn)
+  pooling: "eos"               # Cách lấy embedding cuối (eos = end-of-sequence token)
+  cache_dir:                   # Thư mục cache chung (để lưu tokenizers/model); nếu để trống thì dùng mặc định
+  trust_remote_code: true      # Cho phép chạy code gốc từ repo (ví dụ custom config)
+  mlm_head: true               # Dùng head cho Masked Language Modeling (nếu cần fine-tune/tiền huấn luyện)
+
+projection_head:               # Phần head mà đưa embedding về không gian chung
+  name: "linear"               # Loại projection: linear hoặc MLP
+  dropout: 0.1                 # Tỉ lệ dropout trước khi proj
+  proj_dim: 512                # Kích thước embedding đầu ra sau projection
