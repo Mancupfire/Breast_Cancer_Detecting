@@ -40,10 +40,10 @@ base:
   epochs: 20
   amp: true                            # bật mixed‐precision (torch.cuda.amp)
 
-  # Các tùy chọn resume / checkpoint
+  # Các tùy chọn resume / checkpoint (Tạm thời mình sẽ để trống)
   resume_training: false
-  checkpoint_to_start: ""              # ví dụ: "checkpoints/best.pth" nếu bạn resume
-  epoch_to_start: 0
+  checkpoint_to_start: ""            # Mình sẽ để best checkpoint model ở đây để resume training
+  epoch_to_start: 0         
 
 
   output:
