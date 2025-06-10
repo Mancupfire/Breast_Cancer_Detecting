@@ -7,22 +7,19 @@ defaults:
   - model: clip_b2_clinical            # cấu hình model chính 
   - optimizer: adamw                   # cấu hình optimizer 
   - scheduler: cosine_epoch15_warmup   # cấu hình scheduler 
-  - loss: mapper_loss                  # cấu hình loss function 
+  - loss: breast_clip                  # cấu hình loss function 
   
 
 base:
-  data_dir: "[Data tong o day]"        # thư mục gốc chứa ảnh và metadata.csv
+  data_dir: "[Full Data o day]"        # thư mục gốc chứa ảnh và metadata.csv
   csv_file: "[Data Tabular]"           # tên file CSV trong data_dir
-
   seed: 10                             # seed ngẫu nhiên cho reproducibility
   fold: 0                              # current fold (nếu bạn chia k‐fold)
   data_frac: 1.0                       # tỉ lệ data thực sự dùng (1.0 = full dataset)
-
   mean: [0.485, 0.456, 0.406]          # mean để normalize ảnh (ImageNet‐style)
   std:  [0.229, 0.224, 0.225]          # std  để normalize ảnh
   image_size_h: 1024                   # resize height
   image_size_w: 1024                   # resize width
-
   text_max_length: 256                 # max_length khi tokenize prompt/report
 
   lang_emb: 512                        # dimension embedding của text (phải match attr_embs)
@@ -30,10 +27,14 @@ base:
   one_proj: false                      # True nếu chỉ muốn 1 head chung, false = mỗi attribute 1 head
   adapter: false                       # True nếu muốn bật adapter mixing (0.2*p + 0.8*region)
 
+  multi_view: true
+  view_names: ["CC","MLO"]
+
   batch_size: 16
   num_workers: 4
   balanced_dataloader: false           # nếu true → dùng WeightedRandomSampler
   sampler_weights: 
+
   lr: 5e-5
   weight_decay: 1e-5
   temperature: 0.07                    # τ trong contrastive loss
@@ -58,3 +59,15 @@ hydra:
   job:
     name: mammo_factor
   output_subdir: null
+
+
+loss:
+  breast_clip:
+    label_smoothing: 0.0
+    i2i_weight:      1.0
+    t2t_weight:      1.0
+    loss_ratio:      1.0
+
+  multi_view:
+    enabled:     ${base.multi_view}
+    view_weight: [0.5, 0.5]
