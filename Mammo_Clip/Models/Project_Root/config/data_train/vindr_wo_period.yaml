@@ -1,9 +1,0 @@
-umpc_wo_period:
-  name: vindr                    # Tên của data dùng để train
-  data_type: imagetext           # Loại dữ liệu: imagetext (ảnh + text)
-  data_dir:                      # Đường dẫn đến thư mục gốc của dataset (Bao gồm cả ảnh và table)
-  img_dir:                       # Đường dẫn đến file ảnh của data
-  data_path:                     # Đường dẫn đến metadata, text/table
-  text_max_length: 256           # Độ dài tối đa cho tokenizer khi mã hóa phần văn bản
-  data_frac: 1.0                 # Tỉ lệ dữ liệu mà ta sẽ sử dụng (Đang set là 100%)
-

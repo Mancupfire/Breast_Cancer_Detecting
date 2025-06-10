@@ -1,5 +1,0 @@
-breast_clip:
-  label_smoothing: 0.0   # Làm mờ nhãn (label smoothing) để hỗ trợ cho loss phân loại
-  i2i_weight: 1.0        # trọng số cho thành phần loss cho image-to-image
-  t2t_weight: 0.5        # trọng số cho thành phần loss cho text-to-text
-  loss_ratio: 1.0        # tỷ lệ tổng hợp (scale) các thành phần loss chung của breast_clip
