@@ -1,4 +1,3 @@
-# train_model.py
 import os
 import random
 import pickle
@@ -168,7 +167,7 @@ def main(cfg: DictConfig):
                     L2_i2t, L2_t2i = model.compute_logits(I2, T)
                     loss = criterion(L1_i2t, L1_t2i, L2_i2t, L2_t2i)
                 else:
-                    out = model(image=imgs.to(device), input_ids=ids, attention_mask=mask)
+                    out = model(images=imgs.to(device), input_ids=ids, attention_mask=mask)
                     loss = criterion(out['logits_per_image'], out['logits_per_text'])
             scaler.scale(loss).backward()
             scaler.step(optimizer)
@@ -196,7 +195,7 @@ def main(cfg: DictConfig):
                         L2_i2t, L2_t2i = model.compute_logits(I2, T)
                         loss_v = criterion(L1_i2t, L1_t2i, L2_i2t, L2_t2i)
                     else:
-                        out = model(image=imgs.to(device), input_ids=ids, attention_mask=mask)
+                        out = model(images=imgs.to(device), input_ids=ids, attention_mask=mask)
                         loss_v = criterion(out['logits_per_image'], out['logits_per_text'])
                 val_loss += loss_v.item()
         avg_val=val_loss/len(valid_loader)
