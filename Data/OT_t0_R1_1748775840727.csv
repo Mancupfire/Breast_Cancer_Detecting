@@ -1,0 +1,14 @@
+Roi [R1] definition :
+TITRE,UNIT,VALUE
+
+Name,,R1
+Index Left,#, 32766
+Size,[nb voxel], 357879
+Voxel size,[mm],z1.000,y1.000,x1.000
+Voxel time,[microsec],0.0
+Size,[cm3],357.879
+
+R1 :
+,t [#], t[microsec],mean[#],stdev[#],min[#],max[#],peak[#],coorMax[vx],Centroid[mm],wCentroid[mm]
+,t0,0.0,81.8830135325068,28.558039091758367,0.0,255.0,NaN,z0.0 y1661.0 x664.0,z0.0 y1588.0750225634922 x564.687112124489,z0.0 y1593.531934096434 x558.2123227955191
+

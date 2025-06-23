@@ -1,0 +1,12 @@
+# ——— Virtual environments ———
+ok/            
+
+# ——— Python bytecode and caches ———
+__pycache__/  
+*.py[cod]  
+
+# ——— IDE and editor settings ———
+.vscode/   
+
+# ——— OS-generated files ———
+Thumbs.db
